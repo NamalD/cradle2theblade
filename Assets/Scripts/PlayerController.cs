@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -28,9 +29,6 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         _moveHorizontal = Input.GetAxisRaw("Horizontal");
-        if (_moveHorizontal != 0)
-            Debug.Log(_moveVertical);
-
         _moveVertical = Input.GetAxisRaw("Vertical");
     }
 
@@ -41,9 +39,21 @@ public class PlayerController : MonoBehaviour
             playerRigidbody.AddForce(new Vector2(_moveHorizontal * moveSpeed, 0), ForceMode2D.Impulse);
         }
 
-        if (_moveVertical > 0f)
+        if (!_isJumping && _moveVertical > 0f)
         {
             playerRigidbody.AddForce(Vector2.up * jumpForce);
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        Debug.Log($"Colliding with {other.name}");
+        _isJumping = false;
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        Debug.Log($"Stopped Colliding with {other.name}");
+        _isJumping = true;
     }
 }
