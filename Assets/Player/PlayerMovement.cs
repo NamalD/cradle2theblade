@@ -21,12 +21,12 @@ namespace Player
             _playerRigidbody = GetComponent<Rigidbody2D>();
         }
 
-        private void Update()
+        public void UpdateMovement(float movement)
         {
-            _moveHorizontal = Input.GetAxisRaw("Horizontal");
+            _moveHorizontal = movement;
             _animations.SetMoveSpeed(_moveHorizontal);
         }
-        
+
         private void FixedUpdate()
         {
             if (_moveHorizontal is > 0f or < 0f)
@@ -39,7 +39,7 @@ namespace Player
                 Flip();
             }
         }
-        
+
         private void Flip()
         {
             var o = gameObject;
