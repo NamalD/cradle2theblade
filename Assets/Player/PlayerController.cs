@@ -1,20 +1,16 @@
 using Enemies;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Player
 {
     [RequireComponent(typeof(PlayerAnimations))]
+    [RequireComponent(typeof(PlayerMovement))]
     public class PlayerController : MonoBehaviour
     {
-        [SerializeField]
-        private Rigidbody2D playerRigidbody;
-
         // TODO: Bundle combat together
         [SerializeField]
         private Transform attackPoint;
 
-        [FormerlySerializedAs("attackRange")]
         [SerializeField]
         private float attackRadius = 0.5f;
 
@@ -25,13 +21,7 @@ namespace Player
         private LayerMask enemyLayers;
 
         private PlayerAnimations _animations;
-
-        // TODO: Extract movement
-        [SerializeField]
-        private float moveSpeed = 3f;
-    
-        private float _moveHorizontal;
-        private bool _facingRight = true;
+        private PlayerMovement _movement;
 
         private void Awake()
         {
@@ -47,26 +37,10 @@ namespace Player
 
         void Update()
         {
-            _moveHorizontal = Input.GetAxisRaw("Horizontal");
-            _animations.SetMoveSpeed(_moveHorizontal);
-
             // TODO: Limit attacks
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
                 Attack();
-            }
-        }
-
-        private void FixedUpdate()
-        {
-            if (_moveHorizontal is > 0f or < 0f)
-            {
-                playerRigidbody.AddForce(new Vector2(_moveHorizontal * moveSpeed, 0), ForceMode2D.Impulse);
-            }
-
-            if (_facingRight && _moveHorizontal < 0f || !_facingRight && _moveHorizontal > 0f)
-            {
-                Flip();
             }
         }
 
@@ -81,16 +55,6 @@ namespace Player
                 HeavyAttackCharges++;
                 collision.GetComponent<Enemy>().Attack(AttackDamage);
             }
-        }
-
-        private void Flip()
-        {
-            var o = gameObject;
-            var currentScale = o.transform.localScale;
-            currentScale.x *= -1;
-            o.transform.localScale = currentScale;
-
-            _facingRight = !_facingRight;
         }
 
         private void OnDrawGizmosSelected()
