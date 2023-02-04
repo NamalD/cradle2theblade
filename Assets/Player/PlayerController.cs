@@ -15,14 +15,17 @@ namespace Player
             _combat = GetComponent<PlayerCombat>();
         }
 
-        void Update()
+        private void Update()
         {
             // TODO: Limit attacks
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
                 _combat.Attack();
             }
-
+            
+            // TODO: Pistol
+            // TODO: Grapple
+            
             _movement.UpdateMovement(Input.GetAxisRaw("Horizontal"));
         }
     }

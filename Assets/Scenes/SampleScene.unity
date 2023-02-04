@@ -858,11 +858,11 @@ GameObject:
   - component: {fileID: 1412685461}
   - component: {fileID: 1412685462}
   - component: {fileID: 1412685463}
-  - component: {fileID: 1412685465}
-  - component: {fileID: 1412685464}
   - component: {fileID: 1412685466}
+  - component: {fileID: 1412685464}
   - component: {fileID: 1412685468}
   - component: {fileID: 1412685467}
+  - component: {fileID: 1412685469}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -997,37 +997,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23ea97217ccc7e042937da04633dee16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackPoint: {fileID: 1521728610}
-  attackRadius: 0.24
-  enemyLayers:
-    serializedVersion: 2
-    m_Bits: 8
---- !u!61 &1412685465
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1412685458}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.42}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.34, y: 0.71}
-    newSize: {x: 1.3, y: 1.82}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.41, y: 0.08688271}
-  m_EdgeRadius: 0
 --- !u!95 &1412685466
 Animator:
   serializedVersion: 5
@@ -1074,6 +1043,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 1412685466}
+--- !u!114 &1412685469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1412685458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee44ede76dfd400b93332da6b3b59d3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackPoint: {fileID: 1521728610}
+  attackRadius: 0.5
+  attackDamage: 10
+  enemyLayers:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!1 &1521728609
 GameObject:
   m_ObjectHideFlags: 0
@@ -1156,8 +1143,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdc7c6ec3b0b3364a807fc67a25aaafd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1412685464}
-  countText: {fileID: 1618705793}
 --- !u!114 &1618705793
 MonoBehaviour:
   m_ObjectHideFlags: 0

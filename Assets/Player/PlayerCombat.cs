@@ -27,6 +27,7 @@ namespace Player
         
         public void Attack()
         {
+            // TODO: Chain attack sequence
             _animations.SetAttacking();
         
             // ReSharper disable once Unity.PreferNonAllocApi
@@ -36,6 +37,7 @@ namespace Player
                 collision.GetComponent<Enemy>().Attack(attackDamage);
             }
         }
+        
 
         private void OnDrawGizmosSelected()
         {
