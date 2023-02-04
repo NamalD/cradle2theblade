@@ -1,10 +1,10 @@
-using System;
 using Enemies;
 using UnityEngine;
 using UnityEngine.Serialization;
 
 namespace Player
 {
+    [RequireComponent(typeof(PlayerAnimations))]
     public class PlayerController : MonoBehaviour
     {
         [SerializeField]
@@ -24,30 +24,22 @@ namespace Player
         [SerializeField]
         private LayerMask enemyLayers;
 
-        // TODO: Bundle animation stuff together
-        [SerializeField]
-        private Animator animator;
+        private PlayerAnimations _animations;
 
-        private static readonly int MoveSpeed = Animator.StringToHash("MoveSpeed");
-        private static readonly int Attacking = Animator.StringToHash("Attacking");
-        private static readonly int HeavyAttacking = Animator.StringToHash("HeavyAttacking");
-
+        // TODO: Extract movement
         [SerializeField]
         private float moveSpeed = 3f;
-
-        [SerializeField]
-        private float jumpForce = 60f;
     
         private float _moveHorizontal;
-        private float _moveVertical;
-        private bool _isJumping;
         private bool _facingRight = true;
 
-        // Start is called before the first frame update
+        private void Awake()
+        {
+            _animations = GetComponent<PlayerAnimations>();
+        }
 
         void Start()
         {
-            _isJumping = false;
             HeavyAttackCharges = 0;
         }
 
@@ -56,19 +48,12 @@ namespace Player
         void Update()
         {
             _moveHorizontal = Input.GetAxisRaw("Horizontal");
-            animator.SetFloat(MoveSpeed, Math.Abs(_moveHorizontal));
-
-            _moveVertical = Input.GetAxisRaw("Vertical");
+            _animations.SetMoveSpeed(_moveHorizontal);
 
             // TODO: Limit attacks
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
                 Attack();
-            }
-
-            if (Input.GetKeyDown(KeyCode.Mouse1))
-            {
-                HeavyAttack();
             }
         }
 
@@ -83,38 +68,19 @@ namespace Player
             {
                 Flip();
             }
-
-            if (!_isJumping && _moveVertical > 0f)
-            {
-                playerRigidbody.AddForce(Vector2.up * jumpForce);
-            }
         }
 
         private void Attack()
         {
-            animator.SetTrigger(Attacking);
+            _animations.SetAttacking();
         
+            // ReSharper disable once Unity.PreferNonAllocApi
             var attackCollisions = Physics2D.OverlapCircleAll(attackPoint.position, attackRadius, enemyLayers);
             foreach (var collision in attackCollisions)
             {
                 HeavyAttackCharges++;
                 collision.GetComponent<Enemy>().Attack(AttackDamage);
             }
-        }
-
-        private void HeavyAttack()
-        {
-            animator.SetTrigger(HeavyAttacking);
-        
-            // TODO: Refactor repetition
-            var attackCollisions = Physics2D.OverlapCircleAll(attackPoint.position, attackRadius, enemyLayers);
-            foreach (var collision in attackCollisions)
-            {
-                // TODO: Handle 0 charges (disable heavy attack?)
-                collision.GetComponent<Enemy>().Attack(AttackDamage * HeavyAttackCharges);
-            }
-
-            HeavyAttackCharges = 0;
         }
 
         private void Flip()
@@ -125,18 +91,6 @@ namespace Player
             o.transform.localScale = currentScale;
 
             _facingRight = !_facingRight;
-        }
-
-        private void OnTriggerEnter2D(Collider2D other)
-        {
-            Debug.Log($"Colliding with {other.name}");
-            _isJumping = false;
-        }
-
-        private void OnTriggerExit2D(Collider2D other)
-        {
-            Debug.Log($"Stopped Colliding with {other.name}");
-            _isJumping = true;
         }
 
         private void OnDrawGizmosSelected()
