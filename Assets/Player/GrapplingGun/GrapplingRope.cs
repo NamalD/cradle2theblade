@@ -5,12 +5,12 @@ namespace Player.GrapplingGun
 {
     public class GrapplingRope : MonoBehaviour
     {
-        [Header("General References:")]
+        [Header("General References")]
         public GrapplingGun grapplingGun;
 
         public LineRenderer lineRenderer;
 
-        [Header("General Settings:")]
+        [Header("General Settings")]
         [SerializeField]
         private int precision = 40;
 
@@ -18,7 +18,7 @@ namespace Player.GrapplingGun
         [SerializeField]
         private float straightenLineSpeed = 5;
 
-        [Header("Rope Animation Settings:")]
+        [Header("Rope Animation Settings")]
         public AnimationCurve ropeAnimationCurve;
 
         [Range(0.01f, 4)]
@@ -27,7 +27,7 @@ namespace Player.GrapplingGun
 
         private float _waveSize;
 
-        [Header("Rope Progression:")]
+        [Header("Rope Progression")]
         public AnimationCurve ropeProgressionCurve;
 
         [SerializeField]
@@ -36,6 +36,7 @@ namespace Player.GrapplingGun
 
         private float _moveTime;
 
+        // TODO: Are public hide in inspector fields required?
         [HideInInspector]
         public bool isGrappling = true;
 

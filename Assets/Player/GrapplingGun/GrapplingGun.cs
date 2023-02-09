@@ -5,10 +5,10 @@ namespace Player.GrapplingGun
 {
     public class GrapplingGun : MonoBehaviour
     {
-        [Header("Scripts Ref:")]
+        [Header("Scripts Ref")]
         public GrapplingRope grappleRope;
 
-        [Header("Layers Settings:")]
+        [Header("Layers Settings")]
         [SerializeField]
         private bool grappleToAll;
 
@@ -16,22 +16,21 @@ namespace Player.GrapplingGun
         // TODO: Make this a LayerMask instead?
         private int grappleableLayerNumber = 9;
 
-        [Header("Main Camera:")]
+        [Header("Main Camera")]
         public Camera mainCamera;
 
-        [Header("Transform Ref:")]
+        [Header("Transform Ref")]
         public Transform gunHolder;
 
         public Transform gunPivot;
         public Transform firePoint;
 
-        [Header("Physics Ref:")]
+        [Header("Physics Ref")]
         public SpringJoint2D springJoint2D;
 
-        [FormerlySerializedAs("m_rigidbody")]
         public Rigidbody2D mainRigidbody;
 
-        [Header("Rotation:")]
+        [Header("Rotation")]
         [SerializeField]
         private bool rotateOverTime = true;
 
@@ -39,7 +38,7 @@ namespace Player.GrapplingGun
         [SerializeField]
         private float rotationSpeed = 4;
 
-        [Header("Distance:")]
+        [Header("Distance")]
         [SerializeField]
         private bool hasMaxDistance;
 
@@ -52,7 +51,7 @@ namespace Player.GrapplingGun
             PhysicsLaunch
         }
 
-        [Header("Launching:")]
+        [Header("Launching")]
         [SerializeField]
         private bool launchToPoint = true;
 

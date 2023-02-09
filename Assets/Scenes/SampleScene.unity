@@ -1192,7 +1192,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1360739699}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.49, y: 1.49, z: -0.13691866}
+  m_LocalPosition: {x: 4.2, y: 2, z: -0.13691866}
   m_LocalScale: {x: 2.6894, y: 0.43687347, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1386,7 +1386,7 @@ Rigidbody2D:
   m_Mass: 3
   m_LinearDrag: 8
   m_AngularDrag: 8
-  m_GravityScale: 5
+  m_GravityScale: 4
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -1605,7 +1605,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1943125006}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.062961, y: 0.35873762, z: -0.13691866}
+  m_LocalPosition: {x: -0.61, y: 0.43, z: -0.13691866}
   m_LocalScale: {x: 2.6894, y: 0.3618, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2021,7 +2021,7 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 1}
+  - {x: 0, y: 0, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -2030,7 +2030,7 @@ LineRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.07692337
+        value: 0.05
         inSlope: 0
         outSlope: 0
         tangentMode: 0
