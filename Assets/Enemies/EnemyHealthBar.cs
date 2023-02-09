@@ -13,12 +13,12 @@ namespace Enemies
         private float _maxWidth;
 
         // Start is called before the first frame update
-        void Start()
+        private void Start()
         {
             _maxWidth = rectTransform.rect.width;
         }
 
-        void Update()
+        private void Update()
         {
             // TODO: Only change this when enemy health updates (sub to event on enemy?)
             rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, _maxWidth * EnemyHealthPercentage());

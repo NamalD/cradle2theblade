@@ -29,6 +29,7 @@ namespace Player
 
         private void FixedUpdate()
         {
+            // TODO: Dampen movement when flying
             if (_moveHorizontal is > 0f or < 0f)
             {
                 _playerRigidbody.AddForce(new Vector2(_moveHorizontal * moveSpeed, 0), ForceMode2D.Impulse);
