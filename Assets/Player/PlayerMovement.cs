@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Player
 {
@@ -12,6 +14,7 @@ namespace Player
         
         private float _moveHorizontal;
         private bool _facingRight = true;
+        private float _fallTime;
         
         [SerializeField]
         private float moveSpeed = 3f;
@@ -29,6 +32,9 @@ namespace Player
         
         [SerializeField]
         private float cameraShakeMagnitude = 1;
+        
+        [SerializeField]
+        private float shakeFallMultiplier = 2;
 
         private void Awake()
         {
@@ -48,26 +54,43 @@ namespace Player
             if (_moveHorizontal is > 0f or < 0f)
             {
                 _playerRigidbody.AddForce(new Vector2(_moveHorizontal * moveSpeed, 0), ForceMode2D.Impulse);
-                var shake = Shake();
+                
+                // TODO: Only shake on the ground
+                // TODO: Shake while falling
+                var shake = Shake(cameraShakeMagnitude, cameraShakeDuration);
                 StartCoroutine(shake);
             }
 
+            if (_playerRigidbody.velocity.y < 0)
+            {
+                _fallTime += Time.deltaTime;
+            }
+            else if (_playerRigidbody.velocity.y == 0 && _fallTime > 0)
+            {
+                Debug.Log(_fallTime);
+                // TODO: Fall time cutoff parameter
+                if (_fallTime > 0.5f)
+                    StartCoroutine(Shake(cameraShakeMagnitude * shakeFallMultiplier, cameraShakeDuration));
+                
+                _fallTime = 0;
+            }
+            
             if (_facingRight && _moveHorizontal < 0f || !_facingRight && _moveHorizontal > 0f)
             {
                 Flip();
             }
         }
 
-        private IEnumerator Shake()
+        private IEnumerator Shake(float magnitude, float duration)
         {
             var originalPosition = new Vector3(0, 0, 0);
             var elapsedTime = 0f;
 
-            while (elapsedTime < cameraShakeDuration)
+            while (elapsedTime < duration)
             {
                 // TODO: Repeated
-                var xOffset = Random.Range(-0.5f, 0.5f) * cameraShakeMagnitude;
-                var yOffset = Random.Range(-0.5f, 0.5f) * cameraShakeMagnitude;
+                var xOffset = Random.Range(-0.5f, 0.5f) * magnitude;
+                var yOffset = Random.Range(-0.5f, 0.5f) * magnitude;
 
                 mainCamera.transform.localPosition = new Vector3(xOffset, yOffset, originalPosition.z);
 

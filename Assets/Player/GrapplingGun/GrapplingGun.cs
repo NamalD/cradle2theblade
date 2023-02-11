@@ -155,6 +155,8 @@ namespace Player.GrapplingGun
             if (hit.point is { x: 0, y: 0 })
                 return;
             
+            // TODO: Do something to enemy if grappled to enemy
+            
             if (hasMaxDistance && Vector2.Distance(hit.point, firePoint.position) > maxDistance)
                 return;
             
