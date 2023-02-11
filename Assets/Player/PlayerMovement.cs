@@ -32,7 +32,7 @@ namespace Player
 
         private void FixedUpdate()
         {
-            // TODO: Dampen movement when flying
+            // TODO: Dampen movement when flying and not attached to grapple
             if (_moveHorizontal is > 0f or < 0f)
             {
                 _playerRigidbody.AddForce(new Vector2(_moveHorizontal * moveSpeed, 0), ForceMode2D.Impulse);
@@ -46,7 +46,6 @@ namespace Player
 
         private void Flip()
         {
-            // TODO: Don't flip grapple pivot
             var o = gameObject;
             var currentScale = o.transform.localScale;
             currentScale.x *= -1;

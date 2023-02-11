@@ -356,7 +356,7 @@ MonoBehaviour:
   firePoint: {fileID: 1007558820}
   springJoint2D: {fileID: 1412685470}
   mainRigidbody: {fileID: 1412685462}
-  rotateOverTime: 1
+  rotateOverTime: 0
   rotationSpeed: 4
   hasMaxDistance: 0
   maxDistance: 20
@@ -1463,6 +1463,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 3
+  grapplePivot: {fileID: 36951198}
 --- !u!114 &1412685468
 MonoBehaviour:
   m_ObjectHideFlags: 0
