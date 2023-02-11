@@ -36,12 +36,13 @@ namespace Player.GrapplingGun
 
         private float _moveTime;
 
-        // TODO: Are public hide in inspector fields required?
+        // REFACTOR: Are public hide in inspector fields required?
         [HideInInspector]
         public bool isGrappling = true;
 
         private bool _straightLine = true;
 
+        // FIX: Keep rope connected to attached object
         private void OnEnable()
         {
             _moveTime = 0;
