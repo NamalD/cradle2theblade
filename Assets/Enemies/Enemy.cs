@@ -14,6 +14,8 @@ namespace Enemies
 
         public int CurrentHealth { get; private set; }
 
+        // TODO: Fix bug - physics is disabled when this script is enabled
+        // TODO: Damage enemy on physics collision
         public void Start()
         {
             _animations = GetComponent<EnemyAnimations>();

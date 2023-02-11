@@ -15,8 +15,10 @@ namespace Player
             _combat = GetComponent<PlayerCombat>();
         }
 
+        // TODO: Particle effect when player is moving fast
         private void Update()
         {
+            // TODO: Bounce back if something collides with player
             // TODO: Limit attacks
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {

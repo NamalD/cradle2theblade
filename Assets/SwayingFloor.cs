@@ -25,9 +25,9 @@ public class SwayingFloor : MonoBehaviour
         GenerateRandomSwayLimit();
     }
 
+    // TODO: Particle effect when terrain is moving fast
     private void Update()
     {
-        // TODO: Slide characters around
         if (_swayDirection * transform.rotation.z < _limit)
         {
             SwayToSide();
