@@ -15,6 +15,9 @@ namespace Player
         [SerializeField]
         private float moveSpeed = 3f;
 
+        [SerializeField]
+        private Transform grapplePivot;
+
         private void Awake()
         {
             _animations = GetComponent<PlayerAnimations>();
@@ -43,11 +46,18 @@ namespace Player
 
         private void Flip()
         {
+            // TODO: Don't flip grapple pivot
             var o = gameObject;
             var currentScale = o.transform.localScale;
             currentScale.x *= -1;
+
+            // Temporarily detach grapple point during the flip 
+            grapplePivot.parent = null;
+            
             o.transform.localScale = currentScale;
 
+            grapplePivot.parent = o.transform;
+            
             _facingRight = !_facingRight;
         }
     }

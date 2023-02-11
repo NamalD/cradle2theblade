@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Player.GrapplingGun
 {
@@ -97,19 +96,16 @@ namespace Player.GrapplingGun
             {
                 if (grappleRope.enabled)
                 {
-                    // RotateGun(grapplePoint, false);
+                    RotateGun(grapplePoint, false);
                 }
                 else
                 {
                     Vector2 mousePos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
-                    // RotateGun(mousePos, true);
+                    RotateGun(mousePos, true);
                 }
 
                 if (!launchToPoint || !grappleRope.isGrappling)
-                {
-                    // Debug.Log($"Launch: {launchToPoint}, grappling: {grappleRope.isGrappling}");
                     return;
-                }
 
                 if (launchType != LaunchType.TransformLaunch)
                     return;
@@ -127,26 +123,26 @@ namespace Player.GrapplingGun
             else
             {
                 Vector2 mousePos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
-                // RotateGun(mousePos, true);
+                RotateGun(mousePos, true);
             }
         }
 
         // TODO: Rotate to cursor
-        // private void RotateGun(Vector3 lookPoint, bool allowRotationOverTime)
-        // {
-        //     var distanceVector = lookPoint - gunPivot.position;
-        //
-        //     var angle = Mathf.Atan2(distanceVector.y, distanceVector.x) * Mathf.Rad2Deg;
-        //     if (rotateOverTime && allowRotationOverTime)
-        //     {
-        //         gunPivot.rotation = Quaternion.Lerp(gunPivot.rotation, Quaternion.AngleAxis(angle, Vector3.forward),
-        //             Time.deltaTime * rotationSpeed);
-        //     }
-        //     else
-        //     {
-        //         gunPivot.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        //     }
-        // }
+        private void RotateGun(Vector3 lookPoint, bool allowRotationOverTime)
+        {
+            var distanceVector = lookPoint - gunPivot.position;
+        
+            var angle = Mathf.Atan2(distanceVector.y, distanceVector.x) * Mathf.Rad2Deg;
+            if (rotateOverTime && allowRotationOverTime)
+            {
+                gunPivot.rotation = Quaternion.Lerp(gunPivot.rotation, Quaternion.AngleAxis(angle, Vector3.forward),
+                    Time.deltaTime * rotationSpeed);
+            }
+            else
+            {
+                gunPivot.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            }
+        }
 
         private void SetGrapplePoint()
         {
