@@ -1,3 +1,4 @@
+using UnityEditor.PackageManager;
 using UnityEngine;
 
 namespace Player.GrapplingGun
@@ -13,7 +14,7 @@ namespace Player.GrapplingGun
 
         [SerializeField]
         // TODO: Make this a LayerMask instead?
-        private int grappleableLayerNumber = 9;
+        private LayerMask grappleableLayers;
 
         [Header("Main Camera")]
         public Camera mainCamera;
@@ -150,11 +151,10 @@ namespace Player.GrapplingGun
             if (!Physics2D.Raycast(firePoint.position, distanceVector.normalized))
                 return;
 
-            var hit = Physics2D.Raycast(firePoint.position, distanceVector.normalized);
-            // TODO: If grappling to all - discard boundary hits
-            if (!grappleToAll && hit.transform.gameObject.layer != grappleableLayerNumber)
+            var hit = Physics2D.Raycast(firePoint.position, distanceVector.normalized, distanceVector.magnitude, grappleableLayers.value);
+            if (hit.point is { x: 0, y: 0 })
                 return;
-
+            
             if (hasMaxDistance && Vector2.Distance(hit.point, firePoint.position) > maxDistance)
                 return;
             

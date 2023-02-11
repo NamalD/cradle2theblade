@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 namespace Player
 {
@@ -18,6 +19,17 @@ namespace Player
         [SerializeField]
         private Transform grapplePivot;
 
+        // TODO: Extract camera shake
+        [Header("Camera Shake")]
+        [SerializeField]
+        private Camera mainCamera;
+
+        [SerializeField]
+        private float cameraShakeDuration = 1;
+        
+        [SerializeField]
+        private float cameraShakeMagnitude = 1;
+
         private void Awake()
         {
             _animations = GetComponent<PlayerAnimations>();
@@ -36,12 +48,35 @@ namespace Player
             if (_moveHorizontal is > 0f or < 0f)
             {
                 _playerRigidbody.AddForce(new Vector2(_moveHorizontal * moveSpeed, 0), ForceMode2D.Impulse);
+                var shake = Shake();
+                StartCoroutine(shake);
             }
 
             if (_facingRight && _moveHorizontal < 0f || !_facingRight && _moveHorizontal > 0f)
             {
                 Flip();
             }
+        }
+
+        private IEnumerator Shake()
+        {
+            var originalPosition = new Vector3(0, 0, 0);
+            var elapsedTime = 0f;
+
+            while (elapsedTime < cameraShakeDuration)
+            {
+                // TODO: Repeated
+                var xOffset = Random.Range(-0.5f, 0.5f) * cameraShakeMagnitude;
+                var yOffset = Random.Range(-0.5f, 0.5f) * cameraShakeMagnitude;
+
+                mainCamera.transform.localPosition = new Vector3(xOffset, yOffset, originalPosition.z);
+
+                elapsedTime += Time.deltaTime;
+                
+                yield return null;
+            }
+
+            mainCamera.transform.localPosition = originalPosition;
         }
 
         private void Flip()
