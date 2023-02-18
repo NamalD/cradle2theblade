@@ -15,17 +15,19 @@ namespace World
         private string nextScene;
 
         // TODO: Combine these together (player controller => game object => layer)
-        private GameObject _player;
-
         [SerializeField]
         private LayerMask playerLayer;
 
         [SerializeField]
         private PlayerController playerController;
 
+        private GameObject _player;
+        private GameObject _audio;
+
         private void Awake()
         {
             _player = GameObject.FindWithTag("Player");
+            _audio = GameObject.FindWithTag("Audio");
         }
 
         private void Update()
@@ -48,6 +50,7 @@ namespace World
         private IEnumerator LoadNextScene(string nextSceneName)
         {
             DontDestroyOnLoad(_player);
+            DontDestroyOnLoad(_audio);
             
             var loadOperation = SceneManager.LoadSceneAsync(nextSceneName, LoadSceneMode.Single);
             while (!loadOperation.isDone)
