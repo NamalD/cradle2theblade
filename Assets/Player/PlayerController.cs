@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Player
 {
@@ -6,13 +7,17 @@ namespace Player
     [RequireComponent(typeof(PlayerCombat))]
     public class PlayerController : MonoBehaviour
     {
+        private GameObject _player;
         private PlayerMovement _movement;
         private PlayerCombat _combat;
+        private GrapplingGun.GrapplingGun _grapplingGun;
 
         private void Awake()
         {
+            _player = gameObject;
             _movement = GetComponent<PlayerMovement>();
             _combat = GetComponent<PlayerCombat>();
+            _grapplingGun = GetComponent<GrapplingGun.GrapplingGun>();
         }
 
         // TODO: Particle effect when player is moving fast
@@ -29,6 +34,11 @@ namespace Player
             // TODO: Grapple
             
             _movement.UpdateMovement(Input.GetAxisRaw("Horizontal"));
+        }
+
+        public void MoveToScene(Scene scene)
+        {
+            SceneManager.MoveGameObjectToScene(_player, scene);
         }
     }
 }

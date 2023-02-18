@@ -15,9 +15,6 @@ namespace Player.GrapplingGun
         // TODO: Make this a LayerMask instead?
         private LayerMask grappleableLayers;
 
-        [Header("Main Camera")]
-        public Camera mainCamera;
-
         [Header("Transform Ref")]
         public Transform gunHolder;
 
@@ -82,9 +79,11 @@ namespace Player.GrapplingGun
         {
             grappleRope.enabled = false;
             springJoint2D.enabled = false;
+            
             _startGravityScale = mainRigidbody.gravityScale;
         }
 
+        // TODO: Expensive Camera.main calls - need to consider with scene changes
         private void Update()
         {
             // TODO: Let PlayerController handle grapple bindings
@@ -100,7 +99,7 @@ namespace Player.GrapplingGun
                 }
                 else
                 {
-                    Vector2 mousePos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+                    Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                     RotateGun(mousePos, true);
                 }
 
@@ -122,7 +121,7 @@ namespace Player.GrapplingGun
             }
             else
             {
-                Vector2 mousePos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+                Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 RotateGun(mousePos, true);
             }
         }
@@ -146,7 +145,7 @@ namespace Player.GrapplingGun
 
         private void SetGrapplePoint()
         {
-            Vector2 distanceVector = mainCamera.ScreenToWorldPoint(Input.mousePosition) - gunPivot.position;
+            Vector2 distanceVector = Camera.main.ScreenToWorldPoint(Input.mousePosition) - gunPivot.position;
             if (!Physics2D.Raycast(firePoint.position, distanceVector.normalized))
                 return;
 

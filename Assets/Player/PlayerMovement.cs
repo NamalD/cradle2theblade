@@ -25,9 +25,6 @@ namespace Player
         // TODO: Extract camera shake
         [Header("Camera Shake")]
         [SerializeField]
-        private Camera mainCamera;
-
-        [SerializeField]
         private float cameraShakeDuration = 1;
         
         [SerializeField]
@@ -91,14 +88,14 @@ namespace Player
                 var xOffset = Random.Range(-0.5f, 0.5f) * magnitude;
                 var yOffset = Random.Range(-0.5f, 0.5f) * magnitude;
 
-                mainCamera.transform.localPosition = new Vector3(xOffset, yOffset, originalPosition.z);
+                Camera.main.transform.localPosition = new Vector3(xOffset, yOffset, originalPosition.z);
 
                 elapsedTime += Time.deltaTime;
                 
                 yield return null;
             }
 
-            mainCamera.transform.localPosition = originalPosition;
+            Camera.main.transform.localPosition = originalPosition;
         }
 
         private void Flip()
