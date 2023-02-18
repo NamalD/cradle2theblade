@@ -67,7 +67,6 @@ namespace Player
             }
             else if (_playerRigidbody.velocity.y == 0 && _fallTime > 0)
             {
-                Debug.Log(_fallTime);
                 // TODO: Fall time cutoff parameter
                 if (_fallTime > 0.5f)
                     StartCoroutine(Shake(cameraShakeMagnitude * shakeFallMultiplier, cameraShakeDuration));
