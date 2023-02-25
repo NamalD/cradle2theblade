@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -20,7 +19,7 @@ namespace Player
         private float moveSpeed = 3f;
 
         [SerializeField]
-        private Transform grapplePivot;
+        private Transform[] excludeFromFlip;
 
         // TODO: Extract camera shake
         [Header("Camera Shake")]
@@ -77,7 +76,7 @@ namespace Player
             }
         }
 
-        private IEnumerator Shake(float magnitude, float duration)
+        private static IEnumerator Shake(float magnitude, float duration)
         {
             var originalPosition = new Vector3(0, 0, 0);
             var elapsedTime = 0f;
@@ -104,13 +103,15 @@ namespace Player
             var currentScale = o.transform.localScale;
             currentScale.x *= -1;
 
-            // Temporarily detach grapple point during the flip 
-            grapplePivot.parent = null;
-            
+            // Temporarily detach pivot point which follow the mouse during the flip 
+            foreach (var excluded in excludeFromFlip)
+                excluded.parent = null;
+
             o.transform.localScale = currentScale;
 
-            grapplePivot.parent = o.transform;
-            
+            foreach (var excluded in excludeFromFlip)
+                excluded.parent = o.transform;
+
             _facingRight = !_facingRight;
         }
     }
