@@ -1,4 +1,4 @@
-using Projectile;
+using Player.Gun;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -6,19 +6,14 @@ namespace Player
 {
     [RequireComponent(typeof(PlayerMovement))]
     [RequireComponent(typeof(PlayerCombat))]
+    [RequireComponent(typeof(GunBehaviour))]
     public class PlayerController : MonoBehaviour
     {
         private GameObject _player;
         private PlayerMovement _movement;
         private PlayerCombat _combat;
         private GrapplingGun.GrapplingGun _grapplingGun;
-
-        // TODO: Extract gun behaviour
-        [SerializeField]
-        private ProjectileBehaviour projectilePrefab;
-
-        [SerializeField]
-        private Transform gunFirePoint;
+        private GunBehaviour _gun;
 
         private void Awake()
         {
@@ -26,6 +21,7 @@ namespace Player
             _movement = GetComponent<PlayerMovement>();
             _combat = GetComponent<PlayerCombat>();
             _grapplingGun = GetComponent<GrapplingGun.GrapplingGun>();
+            _gun = GetComponent<GunBehaviour>();
         }
 
         // TODO: Particle effect when player is moving fast
@@ -38,11 +34,10 @@ namespace Player
                 _combat.Attack();
             }
             
-            // TODO: Pistol
+            // TODO: Limit rate of fire
             if (Input.GetKeyDown(KeyCode.F))
             {
-                // TODO: Create a gun fire position which is independent from the grapple
-                Instantiate(projectilePrefab, gunFirePoint.position, gunFirePoint.rotation);
+                _gun.Fire();
             }
             
             // TODO: Move Grapple inputs to this controller
