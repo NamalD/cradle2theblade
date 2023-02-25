@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Projectile
+namespace Player.Gun.Projectile
 {
     public class ProjectileBehaviour : MonoBehaviour
     {

@@ -1,4 +1,4 @@
-﻿using Projectile;
+﻿using Player.Gun.Projectile;
 using UnityEngine;
 
 namespace Player.Gun
