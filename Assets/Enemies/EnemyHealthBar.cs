@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Enemies
 {
@@ -7,23 +9,23 @@ namespace Enemies
         [SerializeField]
         private Enemy enemy;
 
-        [SerializeField]
-        private RectTransform rectTransform;
+        private Slider _slider;
 
-        private float _maxWidth;
+        private void Awake()
+        {
+            _slider = GetComponent<Slider>();
+        }
 
-        // Start is called before the first frame update
         private void Start()
         {
-            _maxWidth = rectTransform.rect.width;
+            _slider.maxValue = enemy.MaxHealth;
+            _slider.value = enemy.CurrentHealth;
         }
 
         private void Update()
         {
-            // TODO: Only change this when enemy health updates (sub to event on enemy?)
-            rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, _maxWidth * EnemyHealthPercentage());
+            // TODO: Only update when enemy health changes
+            _slider.value = enemy.CurrentHealth;
         }
-
-        private float EnemyHealthPercentage() => enemy.CurrentHealth * 1f / enemy.MaxHealth;
     }
 }

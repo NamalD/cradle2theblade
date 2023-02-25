@@ -7,7 +7,7 @@ namespace Player
     public class PlayerCombat : MonoBehaviour
     {
         private PlayerAnimations _animations;
-        
+
         [SerializeField]
         private Transform attackPoint;
 
@@ -24,20 +24,20 @@ namespace Player
         {
             _animations = GetComponent<PlayerAnimations>();
         }
-        
+
         public void Attack()
         {
             // TODO: Chain attack sequence
             _animations.SetAttacking();
-        
+
             // ReSharper disable once Unity.PreferNonAllocApi
             var attackCollisions = Physics2D.OverlapCircleAll(attackPoint.position, attackRadius, enemyLayers);
             foreach (var collision in attackCollisions)
             {
-                collision.GetComponent<Enemy>().Attack(attackDamage);
+                collision.GetComponent<Enemy>()?.Attack(attackDamage);
             }
         }
-        
+
 
         private void OnDrawGizmosSelected()
         {

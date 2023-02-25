@@ -21,6 +21,7 @@ namespace Player.Gun.Projectile
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
+            // TODO: Damage enemies
             PushCollidedObject(collision);
             Destroy(gameObject);
         }
