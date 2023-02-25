@@ -6,12 +6,16 @@ namespace Enemies
     public class Enemy : MonoBehaviour
     {
         private EnemyAnimations _animations;
-    
+
         [SerializeField]
         private int maxHealth = 100;
 
+        [Header("Scatter Damage")]
         [SerializeField]
-        private int scatterDamage = 10;
+        private int baseScatterDamage = 10;
+
+        [SerializeField]
+        private float highScatterThreshold = 3f;
 
         public int MaxHealth => maxHealth;
 
@@ -42,7 +46,7 @@ namespace Enemies
         private void Die()
         {
             _animations.TriggerDeath();
-        
+
             GetComponent<Collider2D>().enabled = false;
             enabled = false;
             Destroy(gameObject);
@@ -53,7 +57,9 @@ namespace Enemies
             if (collision.gameObject.layer != LayerMask.NameToLayer("Scatter"))
                 return;
 
-            // TODO: Scale damage based on speed of collision
+            var scatterDamageScale = collision.relativeVelocity.magnitude / highScatterThreshold;
+            var scatterDamage = (int)(baseScatterDamage * scatterDamageScale);
+            Debug.Log($"Scatter damage: {scatterDamage}");
             HandleDamage(scatterDamage);
         }
     }

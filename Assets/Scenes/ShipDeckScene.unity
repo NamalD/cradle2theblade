@@ -3033,7 +3033,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  scatterDamage: 10
+  baseScatterDamage: 30
+  highScatterThreshold: 3
 --- !u!95 &1958054607
 Animator:
   serializedVersion: 5
