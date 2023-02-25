@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Enemies
 {
@@ -16,11 +17,14 @@ namespace Enemies
 
         [SerializeField]
         private float highScatterThreshold = 3f;
+        
+        public UnityEvent onDeath;
 
         public int MaxHealth => maxHealth;
 
         public int CurrentHealth { get; private set; }
 
+        // TODO: Fall damage
         public void Start()
         {
             _animations = GetComponent<EnemyAnimations>();
@@ -47,6 +51,8 @@ namespace Enemies
         {
             _animations.TriggerDeath();
 
+            onDeath.Invoke();
+            
             GetComponent<Collider2D>().enabled = false;
             enabled = false;
             Destroy(gameObject);
