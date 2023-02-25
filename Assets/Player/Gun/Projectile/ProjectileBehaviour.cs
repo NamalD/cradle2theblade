@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Player.Gun.Projectile
 {
@@ -7,15 +8,30 @@ namespace Player.Gun.Projectile
         [SerializeField]
         private float speed = 2.0f;
 
+        [FormerlySerializedAs("pushbackForce")]
+        [SerializeField]
+        private int knockbackForce = 100;
+
+        public Transform GunPivot { get; set; }
+
         private void Update()
         {
             transform.Translate(Time.deltaTime * speed * Vector3.right);
         }
 
-        private void OnCollisionEnter2D()
+        private void OnCollisionEnter2D(Collision2D collision)
         {
-            // TODO: Push enemies and boxes back
+            PushCollidedObject(collision);
             Destroy(gameObject);
+        }
+
+        private void PushCollidedObject(Collision2D collision)
+        {
+            if (collision.rigidbody == null)
+                return;
+            
+            var direction = (collision.transform.position - GunPivot.position).normalized;
+            collision.rigidbody.AddForce(direction * knockbackForce);
         }
     }
 }

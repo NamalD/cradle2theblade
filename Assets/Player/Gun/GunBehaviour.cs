@@ -22,7 +22,8 @@ namespace Player.Gun
 
         public void Fire()
         {
-            Instantiate(projectilePrefab, gunFirePoint.position, gunFirePoint.rotation);
+            var projectile = Instantiate(projectilePrefab, gunFirePoint.position, gunFirePoint.rotation);
+            projectile.GunPivot = gunPivot;
         }
         
         private void RotateGun(Vector3 lookPoint)
