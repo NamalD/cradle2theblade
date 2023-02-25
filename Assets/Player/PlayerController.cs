@@ -1,3 +1,4 @@
+using Projectile;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,6 +12,13 @@ namespace Player
         private PlayerMovement _movement;
         private PlayerCombat _combat;
         private GrapplingGun.GrapplingGun _grapplingGun;
+
+        // TODO: Extract gun behaviour
+        [SerializeField]
+        private ProjectileBehaviour projectilePrefab;
+
+        [SerializeField]
+        private Transform gunFirePoint;
 
         private void Awake()
         {
@@ -31,7 +39,13 @@ namespace Player
             }
             
             // TODO: Pistol
-            // TODO: Grapple
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                // TODO: Create a gun fire position which is independent from the grapple
+                Instantiate(projectilePrefab, gunFirePoint.position, gunFirePoint.rotation);
+            }
+            
+            // TODO: Move Grapple inputs to this controller
             
             _movement.UpdateMovement(Input.GetAxisRaw("Horizontal"));
         }
