@@ -1,9 +1,10 @@
+using Common;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Enemies
+namespace UI
 {
-    public class EnemyHealthBar : MonoBehaviour
+    public class HealthBar : MonoBehaviour
     {
         private Health _health;
         private Slider _slider;
