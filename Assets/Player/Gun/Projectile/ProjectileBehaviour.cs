@@ -1,5 +1,5 @@
+using Enemies;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Player.Gun.Projectile
 {
@@ -8,9 +8,11 @@ namespace Player.Gun.Projectile
         [SerializeField]
         private float speed = 2.0f;
 
-        [FormerlySerializedAs("pushbackForce")]
         [SerializeField]
         private int knockbackForce = 100;
+
+        [SerializeField]
+        private int bulletDamage = 10;
 
         public Transform GunPivot { get; set; }
 
@@ -21,7 +23,12 @@ namespace Player.Gun.Projectile
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            // TODO: Damage enemies
+            var enemy = collision.gameObject.GetComponent<Enemy>();
+            if (enemy)
+            {
+                enemy.Attack(bulletDamage);
+            }
+            
             PushCollidedObject(collision);
             Destroy(gameObject);
         }
