@@ -40,7 +40,6 @@ namespace Enemies
 
         private void Die()
         {
-            Debug.Log("Dying");
             _animations.TriggerDeath();
 
             GetComponent<Collider2D>().enabled = false;
