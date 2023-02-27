@@ -1,15 +1,14 @@
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace Enemies
 {
     [RequireComponent(typeof(EnemyAnimations))]
+    [RequireComponent(typeof(Health))]
     public class Enemy : MonoBehaviour
     {
         private EnemyAnimations _animations;
-
-        [SerializeField]
-        private int maxHealth = 100;
+        
+        public Health Health { get; private set; }
 
         [Header("Scatter Damage")]
         [SerializeField]
@@ -17,18 +16,14 @@ namespace Enemies
 
         [SerializeField]
         private float highScatterThreshold = 3f;
-        
-        public UnityEvent onDeath;
-
-        public int MaxHealth => maxHealth;
-
-        public int CurrentHealth { get; private set; }
 
         // TODO: Fall damage
-        public void Start()
+        private void Awake()
         {
             _animations = GetComponent<EnemyAnimations>();
-            CurrentHealth = maxHealth;
+            
+            Health = GetComponent<Health>();
+            Health.onDeath.AddListener(Die);
         }
 
         public void Attack(int damage)
@@ -38,21 +33,15 @@ namespace Enemies
 
         private void HandleDamage(int damage)
         {
-            CurrentHealth -= damage;
             _animations.TriggerHurt();
-
-            if (CurrentHealth <= 0)
-            {
-                Die();
-            }
+            Health.TakeDamage(damage);
         }
 
         private void Die()
         {
+            Debug.Log("Dying");
             _animations.TriggerDeath();
 
-            onDeath.Invoke();
-            
             GetComponent<Collider2D>().enabled = false;
             enabled = false;
             Destroy(gameObject);
@@ -65,7 +54,6 @@ namespace Enemies
 
             var scatterDamageScale = collision.relativeVelocity.magnitude / highScatterThreshold;
             var scatterDamage = (int)(baseScatterDamage * scatterDamageScale);
-            Debug.Log($"Scatter damage: {scatterDamage}");
             HandleDamage(scatterDamage);
         }
     }

@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 9191207675520444570}
   - component: {fileID: 9191207675520444549}
   - component: {fileID: 9191207675520444571}
+  - component: {fileID: 5280617103237904291}
   m_Layer: 3
   m_Name: Enemy
   m_TagString: Untagged
@@ -182,19 +183,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9945c0d4544857447900e9b9b6f5f210, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
   baseScatterDamage: 30
   highScatterThreshold: 3
+--- !u!114 &5280617103237904291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9191207675520444572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e729a92a65a422f9ea24d2e513a2252, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 80
   onDeath:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11500000, guid: dbb41739b8163254fa18a3bb0a2a6f16, type: 3}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: World.GameManager, Assembly-CSharp
+        m_MethodName: SpawnEnemy
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -557,7 +570,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbfa9a0a764f40b41afb7230ccd0685a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 9191207675520444571}
 --- !u!1 &9191207676556580282
 GameObject:
   m_ObjectHideFlags: 0

@@ -21,7 +21,7 @@ namespace World
         public void SpawnEnemy()
         {
             var enemy = Instantiate(enemyPrefab, enemySpawnPoint.position, enemySpawnPoint.rotation);
-            enemy.onDeath.AddListener(SpawnEnemy);
+            enemy.Health.onDeath.AddListener(SpawnEnemy);
         }
     }
 }

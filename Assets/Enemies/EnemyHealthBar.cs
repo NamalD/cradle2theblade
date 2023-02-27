@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,26 +5,25 @@ namespace Enemies
 {
     public class EnemyHealthBar : MonoBehaviour
     {
-        [SerializeField]
-        private Enemy enemy;
-
+        private Health _health;
         private Slider _slider;
 
         private void Awake()
         {
+            _health = GetComponentInParent<Health>();
             _slider = GetComponent<Slider>();
         }
 
         private void Start()
         {
-            _slider.maxValue = enemy.MaxHealth;
-            _slider.value = enemy.CurrentHealth;
+            _slider.maxValue = _health.MaxHealth;
+            _slider.value = _health.CurrentHealth;
         }
 
         private void Update()
         {
             // TODO: Only update when enemy health changes
-            _slider.value = enemy.CurrentHealth;
+            _slider.value = _health.CurrentHealth;
         }
     }
 }
