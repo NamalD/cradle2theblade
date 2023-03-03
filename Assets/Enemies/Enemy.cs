@@ -30,6 +30,8 @@ namespace Enemies
 
         public Health Health { get; private set; }
 
+        // TODO: Follow player AI
+        // TODO: Grapple to player AI
         private void Awake()
         {
             InitialiseComponents();
