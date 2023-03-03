@@ -620,7 +620,7 @@ MonoBehaviour:
   grappleToAll: 1
   grappleableLayers:
     serializedVersion: 2
-    m_Bits: 520
+    m_Bits: 776
   gunHolder: {fileID: 1412685459}
   gunPivot: {fileID: 36951198}
   firePoint: {fileID: 1007558820}
@@ -1081,7 +1081,7 @@ GameObject:
   - component: {fileID: 810962766}
   - component: {fileID: 810962765}
   - component: {fileID: 810962768}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Floor
   m_TagString: Floor
   m_Icon: {fileID: 0}
@@ -1275,7 +1275,7 @@ GameObject:
   - component: {fileID: 880600274}
   - component: {fileID: 880600276}
   - component: {fileID: 880600275}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: Square (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1667,7 +1667,7 @@ GameObject:
   - component: {fileID: 1205218228}
   - component: {fileID: 1205218229}
   - component: {fileID: 1205218230}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ladder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1865,7 +1865,7 @@ GameObject:
   - component: {fileID: 1360739700}
   - component: {fileID: 1360739702}
   - component: {fileID: 1360739701}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: Square (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2283,7 +2283,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1526106055}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: GrappleTerrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2854,7 +2854,7 @@ GameObject:
   - component: {fileID: 1943125007}
   - component: {fileID: 1943125009}
   - component: {fileID: 1943125008}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3270,18 +3270,6 @@ PrefabInstance:
     - target: {fileID: 9191207675520444574, guid: 2b44515709af72742b61ca3c5d969c4d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9191207675520444575, guid: 2b44515709af72742b61ca3c5d969c4d, type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9191207675520444575, guid: 2b44515709af72742b61ca3c5d969c4d, type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9191207675520444575, guid: 2b44515709af72742b61ca3c5d969c4d, type: 3}
-      propertyPath: m_Color.r
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9191207676078117592, guid: 2b44515709af72742b61ca3c5d969c4d, type: 3}
       propertyPath: m_Camera

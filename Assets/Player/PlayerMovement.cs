@@ -57,17 +57,20 @@ namespace Player
                 StartCoroutine(shake);
             }
 
-            if (_playerRigidbody.velocity.y < 0)
+            switch (_playerRigidbody.velocity.y)
             {
-                _fallTime += Time.deltaTime;
-            }
-            else if (_playerRigidbody.velocity.y == 0 && _fallTime > 0)
-            {
-                // TODO: Fall time cutoff parameter
-                if (_fallTime > 0.5f)
-                    StartCoroutine(Shake(cameraShakeMagnitude * shakeFallMultiplier, cameraShakeDuration));
+                case < 0:
+                    _fallTime += Time.deltaTime;
+                    break;
+                case 0 when _fallTime > 0:
+                {
+                    // TODO: Fall time cutoff parameter
+                    if (_fallTime > 0.5f)
+                        StartCoroutine(Shake(cameraShakeMagnitude * shakeFallMultiplier, cameraShakeDuration));
                 
-                _fallTime = 0;
+                    _fallTime = 0;
+                    break;
+                }
             }
             
             if (_facingRight && _moveHorizontal < 0f || !_facingRight && _moveHorizontal > 0f)

@@ -184,7 +184,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseScatterDamage: 30
-  highScatterThreshold: 3
+  highScatterThreshold: 5
+  fallDamageBase: 3
+  fallTimeThreshold: 0.1
 --- !u!114 &5280617103237904291
 MonoBehaviour:
   m_ObjectHideFlags: 0
