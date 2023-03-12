@@ -7,9 +7,6 @@ namespace Enemies
     [RequireComponent(typeof(Health))]
     public class Enemy : MonoBehaviour
     {
-        private int _scatterLayer;
-        private int _floorLayer;
-        
         private EnemyAnimations _animations;
         private bool _falling;
         private float _fallTime;
@@ -35,7 +32,6 @@ namespace Enemies
         private void Awake()
         {
             InitialiseComponents();
-            InitialiseLayers();
         }
 
         private void InitialiseComponents()
@@ -44,12 +40,6 @@ namespace Enemies
 
             Health = GetComponent<Health>();
             Health.onDeath.AddListener(Die);
-        }
-
-        private void InitialiseLayers()
-        {
-            _scatterLayer = LayerMask.NameToLayer("Scatter");
-            _floorLayer = LayerMask.NameToLayer("Floor");
         }
 
         public void Attack(int damage)
@@ -82,11 +72,11 @@ namespace Enemies
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            if (collision.gameObject.layer == _scatterLayer)
+            if (collision.gameObject.layer == Layers.Instance.Scatter)
             {
                 TakeScatterCollisionDamage(collision);
             }
-            else if (collision.gameObject.layer == _floorLayer)
+            else if (collision.gameObject.layer == Layers.Instance.Floor)
             {
                 TakeFallDamage();
             }
@@ -113,7 +103,7 @@ namespace Enemies
 
         private void OnCollisionExit2D(Collision2D collision)
         {
-            if (collision.gameObject.layer != _floorLayer)
+            if (collision.gameObject.layer != Layers.Instance.Floor)
                 return;
 
             _falling = true;
