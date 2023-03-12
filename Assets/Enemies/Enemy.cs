@@ -10,6 +10,7 @@ namespace Enemies
         private EnemyAnimations _animations;
         private bool _falling;
         private float _fallTime;
+        private EnemyMode _mode = EnemyMode.Patrol;
 
         [Header("Scatter Damage")]
         [SerializeField]
@@ -60,6 +61,17 @@ namespace Enemies
             GetComponent<Collider2D>().enabled = false;
             enabled = false;
             Destroy(gameObject);
+        }
+
+        private void Update()
+        {
+            // TODO: Recheck mode on damage
+
+            // TODO: In chase: move to player
+            // TODO: In chase: Disable patrol behaviour 
+            // TODO: In chase: stick around on timeout if player leaves layer
+            // TODO: In chase: Enable patrol behaviour is player left + timed out
+            // TODO: In chase: attack if near player 
         }
 
         private void FixedUpdate()

@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Floor
   - Audio
+  - Patrol Point
+  - Patrol Point Container
+  - Patrol Point Station
   layers:
   - Default
   - TransparentFX
@@ -17,7 +20,7 @@ TagManager:
   - Scatter
   - Floor
   - Grappleable
-  - 
+  - Patrol Point
   - 
   - 
   - 
